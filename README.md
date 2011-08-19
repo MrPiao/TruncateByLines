@@ -1,5 +1,5 @@
-TruncateToBox
-=============
+TruncateByLines
+===============
 
 by A.P.
 
@@ -11,7 +11,38 @@ Truncates a block of text to a specified number of lines and adds an ellipsis. S
 Instructions
 ------------
 
-Coming soon!
+###Basic Usage
+
+>$(.truncateByLines).truncateByLines();
+
+This will use the default settings (given below) to truncate the content.
+
+###Settings
+
+####Default Settings
+
+>settings = {
+>	'maxLines' : 2,
+>	'trimLongWords' : false,
+>	'ellipsis': '...',
+>	'fullTextToTitle: false
+>};
+
+####Settings Explanation
+
+* *maxLines* sets the number of you would like the text to be truncated to.
+* *trimLongWords* isn't implemented yet, **don't** use it!!!
+* *ellipsis* is the character that is attached at the end of the text when it is truncated. It is not added when there is no truncation.
+* *fullTextToTitle* puts the full text to the tooltip of the container of the text.
+
+####Settings Override Example
+
+>$(.truncateByLines).truncateByLines({
+>	'maxLines': 3,
+>	'fullTextToTitle': true
+>});
+
+This will truncate the text to three lines and put the full text into the container's "title" field <=> the tooltip.
 
 Demos
 -----

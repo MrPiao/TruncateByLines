@@ -1,5 +1,5 @@
 /*!
-	TruncateToBox Plugin for jQuery
+	TruncateByLines Plugin for jQuery
 	v0.1
 	Truncates a block of text to a specified number of lines and adds an ellipsis.
 	Since the ellipsis is an integral part of the truncation algorithm, the ellipsis
@@ -30,7 +30,7 @@
  */
 (function( $ ) {
 
-	$.fn.truncateToBox = function( options ) {
+	$.fn.truncateByLines = function( options ) {
 
 		// Default settings
 		var settings = {
@@ -137,4 +137,4 @@
 			}
 		}); // END of return this.each(function(){}))
 	}
-})( jQuery ); // END of truncateToBox
+})( jQuery ); // END of truncateByLines
