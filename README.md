@@ -13,7 +13,7 @@ Instructions
 
 ###Basic Usage
 
->$(.truncateByLines).truncateByLines();
+	$(.truncateByLines).truncateByLines();
 
 This will use the default settings (given below) to truncate the content.
 
@@ -21,12 +21,12 @@ This will use the default settings (given below) to truncate the content.
 
 ####Default Settings
 
->settings = {
->	'maxLines' : 2,
->	'trimLongWords' : false,
->	'ellipsis': '...',
->	'fullTextToTitle: false
->};
+	settings = {
+		'maxLines' : 2,
+		'trimLongWords' : false,
+		'ellipsis': '...',
+		'fullTextToTitle: false
+	};
 
 ####Settings Explanation
 
