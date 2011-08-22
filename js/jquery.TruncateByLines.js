@@ -1,6 +1,6 @@
 /*!
 	TruncateByLines Plugin for jQuery
-	v0.1
+	v0.2
 	Truncates a block of text to a specified number of lines and adds an ellipsis.
 	Since the ellipsis is an integral part of the truncation algorithm, the ellipsis
 	will never be on an additional line.
@@ -35,9 +35,11 @@
 		// Default settings
 		var settings = {
 			'maxLines' : 2,
-			'trimLongWords': false,
 			'ellipsis': '...',
 			'fullTextToTitle': false,
+			'toggleFullText': false,
+			'lessText': '', //Only used when toggleFullText is true, must be overridden.
+			'ellipsisStyle' : {'font-size': '0.7em', 'color': 'blue'}
 		};
 
 		return this.each(function() {
@@ -80,7 +82,7 @@
 			}
 			
 			$this.empty(); //Fresh slate.
-			var $friendSpan = $('<span>' + settings.ellipsis + '</span>');
+			var $friendSpan = $('<span style="white-space:nowrap">' + settings.ellipsis + '</span>').css(settings.ellipsisStyle);
 			$this.append($friendSpan);
 			var lastTopOffset = $friendSpan.offset().top;
 			//This line height deal is not an exact science.
@@ -101,26 +103,13 @@
 				$friendSpan.remove();
 				if (currentTopOffset > lastTopOffset) {
 					lineCounter++;
-					var trimOverride = false;
-					/*
-					if (currentTopOffset - lastTopOffset > approxLineHeight) {
-						lineCounter++;
-						if (lineCounter > settings.maxLines) {
-							trimOverride = true;
-						}
-					}*/
 					if (lineCounter > settings.maxLines) {
-						if (settings.trimLongWords || trimOverride) {
-							alert("Not implemented yet");
+						var text = $this.text();
+						var i;
+						for (i = 0; i < lastWord.length + 2; i++) {
+							text = text.substring(0, text.length-1);
 						}
-						else {
-							var text = $this.text();
-							var i;
-							for (i = 0; i < lastWord.length + 2; i++) {
-								text = text.substring(0, text.length-1);
-							}
-							$this.text(text);
-						}
+						$this.text(text);
 						$this.append($friendSpan);
 						break;
 					}
@@ -129,6 +118,25 @@
 					}
 				}
 			}
+			
+			if (settings.toggleFullText) {
+				var $fullTextSpan = $('<span class="ttb_fullText" style="display: none">' + fullText + ' </span>');
+				var $lessText = $('<span>' + settings.lessText + '</span>')
+				.css(settings.ellipsisStyle)
+				.css('cursor', 'pointer')
+				.click(function() {
+					$fullTextSpan.hide();
+					$this.show();
+				});
+				$fullTextSpan.append($lessText);
+				$this.after($fullTextSpan);
+				$friendSpan.css('cursor', 'pointer')
+				.click(function() {
+					$this.hide();
+					$fullTextSpan.show();
+				});
+			}
+			
 			if (needToReset) {
 				$notDisplayed.each(function() {
 					$(this).css('display', $(this).data('display'));
