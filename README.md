@@ -56,6 +56,10 @@ Coming soon!
 Changelog
 ---------
 
+###v 0.2.1 (8/25/11)
+
+* Fixed a bug where the ellipsis text _may_ end up in an additional line if the last word of the text is shorter than the ellipsis text.
+
 ###v 0.2 (8/22/11)
 
 * Took deprecated _trimLongWords_ out as I won't be implementing it soon.

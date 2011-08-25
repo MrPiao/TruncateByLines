@@ -1,12 +1,12 @@
 /*!
-	TruncateByLines Plugin for jQuery
-	v0.2
+	TruncateByLines Plugin for jQuery by A.P.
+	v0.2.1
 	Truncates a block of text to a specified number of lines and adds an ellipsis.
 	Since the ellipsis is an integral part of the truncation algorithm, the ellipsis
 	will never be on an additional line.
 	
-	NOTE: This is the very first iteration of the plugin, a "minimum viable product."
-	All initially planned features are not yet implemented.
+	NOTE: This is a very early version of the plugin.
+	Not all initially planned features are implemented.
 	
 	Copyright (C) 2011 by Kee Hyuk Park
 
@@ -28,13 +28,12 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
  */
-(function( $ ) {
-
 	$.fn.truncateByLines = function( options ) {
 
 		// Default settings
 		var settings = {
 			'maxLines' : 2,
+			'trimLongWords': false,
 			'ellipsis': '...',
 			'fullTextToTitle': false,
 			'toggleFullText': false,
@@ -103,13 +102,29 @@
 				$friendSpan.remove();
 				if (currentTopOffset > lastTopOffset) {
 					lineCounter++;
-					if (lineCounter > settings.maxLines) {
-						var text = $this.text();
-						var i;
-						for (i = 0; i < lastWord.length + 2; i++) {
-							text = text.substring(0, text.length-1);
+					var trimOverride = false;
+					/*
+					if (currentTopOffset - lastTopOffset > approxLineHeight) {
+						lineCounter++;
+						if (lineCounter > settings.maxLines) {
+							trimOverride = true;
 						}
-						$this.text(text);
+					}*/
+					if (lineCounter > settings.maxLines) {
+						if (settings.trimLongWords || trimOverride) {
+							alert("Not implemented yet");
+						}
+						else {
+							var text = $this.text();
+							while (true) {
+								text = $.trim(text);
+								text = text.replace(/\s\S+$/, '');
+								if ($friendSpan.offset().top <= lastTopOffset) {
+									break;
+								}
+							}
+							$this.text(text);
+						}
 						$this.append($friendSpan);
 						break;
 					}
@@ -145,4 +160,3 @@
 			}
 		}); // END of return this.each(function(){}))
 	}
-})( jQuery ); // END of truncateByLines
