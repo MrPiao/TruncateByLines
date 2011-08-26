@@ -1,6 +1,6 @@
 /*!
 	TruncateByLines Plugin for jQuery by A.P.
-	v0.2.1
+	v0.3
 	Truncates a block of text to a specified number of lines and adds an ellipsis.
 	Since the ellipsis is an integral part of the truncation algorithm, the ellipsis
 	will never be on an additional line.
@@ -27,7 +27,8 @@
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
- */
+*/
+(function( $ ){
 	$.fn.truncateByLines = function( options ) {
 
 		// Default settings
@@ -38,6 +39,7 @@
 			'fullTextToTitle': false,
 			'toggleFullText': false,
 			'lessText': '', //Only used when toggleFullText is true, must be overridden.
+			'fullTextContainer': 'span', //Only used when toggleFullText is true
 			'ellipsisStyle' : {'font-size': '0.7em', 'color': 'blue'}
 		};
 
@@ -135,7 +137,7 @@
 			}
 			
 			if (settings.toggleFullText) {
-				var $fullTextSpan = $('<span class="ttb_fullText" style="display: none">' + fullText + ' </span>');
+				var $fullTextSpan = $('<'+ settings.fullTextContainer + ' class="ttb_fullText" style="display: none">' + fullText + ' </'+ settings.fullTextContainer + '>');
 				var $lessText = $('<span>' + settings.lessText + '</span>')
 				.css(settings.ellipsisStyle)
 				.css('cursor', 'pointer')
@@ -160,3 +162,4 @@
 			}
 		}); // END of return this.each(function(){}))
 	}
+})( jQuery );

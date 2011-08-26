@@ -37,6 +37,7 @@ This will use the default settings (given below) to truncate the content.
 * *fullTextToTitle* puts the full text to the tooltip of the container of the text.
 * *toggleFullText* enables the ellipsis text to be clickable. When clicked the full text will be toggled visible, and *lessText* will take the place of the ellipsis.
 * *lessText* is only used when toggleFullText is true. It's the text that is clicked to hide the toggled full text.
+* *fullTextContainer* is only used when toggleFullText is true. It determines the container _after_ the truncated text that will hold the full text and is shown and hidden when the ellipsis is clicked.
 * *ellipsisStyle* You can style the ellipsis text and the less text by providing a dictionary to this option.
 
 ####Settings Override Example
@@ -55,6 +56,10 @@ Coming soon!
 
 Changelog
 ---------
+
+###v 0.3 (8/26/11)
+
+* Added the option "fullTextContainer" so that it is now possible to specify the element type of the container that will be shown and hidden containing the full, non-truncated text.
 
 ###v 0.2.1 (8/25/11)
 
